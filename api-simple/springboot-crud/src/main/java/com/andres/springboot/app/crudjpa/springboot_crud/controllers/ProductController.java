@@ -57,9 +57,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Product product = new Product();
-        product.setId(id);
-        Optional<Product> productOptional = service.delete(product);
+        Optional<Product> productOptional = service.delete(id);
         if (productOptional.isPresent()) {
             return ResponseEntity.ok(productOptional.orElseThrow());
         }

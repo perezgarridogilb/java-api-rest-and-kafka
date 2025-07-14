@@ -16,8 +16,8 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private ProductRepository repository;
 
-    @Transactional
     @Override
+    @Transactional
     public Optional<Product> delete(Long id) {
         // Optional<Product> productOptional = repository.findById(product.getId());
         Optional<Product> productOptional = repository.findById(id);
