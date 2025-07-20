@@ -45,9 +45,12 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
-        product.setId(id); // asegurar que el id sea el correcto
-        Product updated = service.save(product);
-        return ResponseEntity.ok(updated);
+        //product.setId(id); // asegurar que el id sea el correcto
+        Optional<Product> productOptional = service.update(id, product);
+        if (productOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(productOptional.orElseThrow());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
