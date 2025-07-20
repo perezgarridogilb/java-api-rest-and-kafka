@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.andres.springboot.app.crudjpa.springboot_crud.models.Product;
 import com.andres.springboot.app.crudjpa.springboot_crud.services.ProductService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +46,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) {
         //product.setId(id); // asegurar que el id sea el correcto
         Optional<Product> productOptional = service.update(id, product);
         if (productOptional.isPresent()) {
@@ -54,7 +56,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(product));
     }
 
