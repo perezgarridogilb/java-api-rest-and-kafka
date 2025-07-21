@@ -22,10 +22,10 @@ public class Product {
     private String name;
 
     @Min(500)
-    @NotNull
+    @NotNull(message = "{NotNull.product.price}")
     private Integer price;
 
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.product.name}")
     private String description;
     public Long getId() {
         return id;
