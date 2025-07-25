@@ -84,7 +84,7 @@ public class ProductController {
      */
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Product product, BindingResult result) {
-                validation.validate(product, result);
+                // validation.validate(product, result);
         if (result.hasFieldErrors()) {
             return validation(result);
         }
