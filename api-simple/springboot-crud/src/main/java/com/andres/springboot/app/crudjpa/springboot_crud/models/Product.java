@@ -1,5 +1,6 @@
 package com.andres.springboot.app.crudjpa.springboot_crud.models;
 
+import com.andres.springboot.app.crudjpa.springboot_crud.validation.IsExistsDb;
 import com.andres.springboot.app.crudjpa.springboot_crud.validation.isRequired;
 
 import jakarta.persistence.Entity;
@@ -18,6 +19,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @isRequired
+    @IsExistsDb
+    private String sku;
 
     @isRequired(message = "{IsRequired.product.name}")
     @Size(min=3, max=20)
@@ -55,7 +60,12 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    public String getSku() {
+        return sku;
+    }
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
 
 }

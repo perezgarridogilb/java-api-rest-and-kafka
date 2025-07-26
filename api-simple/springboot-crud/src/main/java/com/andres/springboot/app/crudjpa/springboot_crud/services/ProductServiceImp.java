@@ -55,6 +55,7 @@ public class ProductServiceImp implements ProductService {
         Optional<Product> productOptional = repository.findById(id);
         if (productOptional.isPresent()) {
             Product productDb = productOptional.orElseThrow();
+            productDb.setName(product.getSku());
             productDb.setName(product.getName());
             productDb.setDescription(product.getDescription());
             productDb.setPrice(product.getPrice());
@@ -62,6 +63,10 @@ public class ProductServiceImp implements ProductService {
         }
         return productOptional;
     }
-
-
+    
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsBySku(String sku) {
+        return repository.existsBySku(sku);
+    }
 }
