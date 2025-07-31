@@ -35,7 +35,12 @@ public class UserController {
     public List<User> list() {
         return service.findAll();
     }
-    
+    /**
+     * Desafortunadamente siempre BindingResult deve ir a la derecha del objeto que se va a validar: 186
+     * @param product
+     * @param result
+     * @return
+     */
     @PostMapping
     public  ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasFieldErrors()) {
