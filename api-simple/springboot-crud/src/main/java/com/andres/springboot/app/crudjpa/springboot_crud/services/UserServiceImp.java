@@ -52,4 +52,10 @@ public class UserServiceImp implements UserService {
         return repository.save(user);
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        // TODO Auto-generated method stub
+        return repository.existsByUsername(username);
+    }
+
 }
