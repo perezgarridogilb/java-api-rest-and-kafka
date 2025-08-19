@@ -29,6 +29,12 @@ List<Person> persons = personRepository.findByProgrammingLanguagueAndName("Java"
 		persons.stream().forEach(person -> {
 			System.out.println(person);
 		});
+
+		List<Object[]> personsValues = personRepository.obtenerPersonData("Python", "Pepe");
+				personsValues.stream().forEach(person -> {
+					System.out.println(person[0] + " es experto en " + person[1]);
+				});
 	}
+
 
 }
