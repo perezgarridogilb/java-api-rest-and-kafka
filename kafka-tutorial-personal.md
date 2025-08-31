@@ -20,12 +20,35 @@ bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 ```
 
 # Describir el tópico "test-topic" para ver su configuración
+```
 bin/kafka-topics.sh --describe --topic test-topic --bootstrap-server localhost:9092  
+```
 
 # Consumidor de mensajes (lee mensajes del tópico "test-topic")
+```
 bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server localhost:9092  
+```
 
 # Productor de mensajes (envía mensajes al tópico "test-topic")
-bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092  
+```
+bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092
+```
 
+# Consumidor de mensajes (lee TODOS los mensajes del tópico "test-topic")
+
+```
 bin/kafka-console-consumer.sh --topic test-topic --from-beginning --bootstrap-server localhost:9092
+```
+
+```
+bin/kafka-console-consumer.sh --topic test-topic --from-beginning --bootstrap-server localhost:9092 --property print.key=true --property key.separator="-"
+```
+
+# Limpiar el ambiente de desarrollo para Kafka
+
+Ese comando resetea tu entorno de desarrollo de Kafka y Zookeeper.
+Cuando lo ejecutes, pierdes todos los datos (topics, mensajes, offsets, metadatos) y la próxima vez que arranques Kafka + Zookeeper, se iniciarán “limpios” como si fuera la primera vez
+
+```
+rm -rf /tmp/kafka-logs /tmp/zookeper
+```
