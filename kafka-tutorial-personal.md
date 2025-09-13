@@ -52,3 +52,11 @@ Cuando lo ejecutes, pierdes todos los datos (topics, mensajes, offsets, metadato
 ```
 rm -rf /tmp/kafka-logs /tmp/zookeper
 ```
+
+En Kafka, el parámetro acks (acknowledgments) define cuántos brokers deben confirmar la recepción de un mensaje antes de que el productor lo considere exitosamente enviado:
+
+acks=0 → El productor no espera confirmación. Máxima velocidad, pero sin garantía de entrega.
+
+acks=1 → El líder del partition confirma. Balance entre rendimiento y fiabilidad.
+
+acks=all (o -1) → Todos los replicas deben confirmar. Máxima seguridad, menor rendimiento.

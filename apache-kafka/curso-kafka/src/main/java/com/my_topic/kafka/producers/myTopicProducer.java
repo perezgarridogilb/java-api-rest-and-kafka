@@ -12,16 +12,18 @@ public class myTopicProducer {
 
     public static final Logger log = LoggerFactory.getLogger(myTopicProducer.class);
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
         props.put("acks", "all");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+                props.put("linger.ms", "10");
 
 try (Producer<String, String> producer = new KafkaProducer<>(props)) {
     // envío de forma asincróna
     // get: de forma sincróna, pero más tardado
-    for (int i = 0; i < 5000; i++) {
+    for (int i = 0; i < 1000000; i++) {
         producer.send(new ProducerRecord<>("my-topic", String.valueOf(i), "my-value"))/* .get() */;
     }
     producer.flush();
@@ -30,8 +32,13 @@ try (Producer<String, String> producer = new KafkaProducer<>(props)) {
 // } catch (InterruptedException e) {
 //     log.error("Message producer interrupted", e);
 }
- catch (Exception e) {
-    log.error("Message producer interrupted", e);
-}
+//  catch (Exception e) {
+//     log.error("Message producer interrupted", e);
+// }
+// 11,515 ms to sent 1,000,000
+// 9,942 ms ms to sent 1,000,000 0
+// 16,231 ms 6
+// 10241 ms 10
+log.info("processing time = {} ms", (System.currentTimeMillis() - startTime));
     }
 }
